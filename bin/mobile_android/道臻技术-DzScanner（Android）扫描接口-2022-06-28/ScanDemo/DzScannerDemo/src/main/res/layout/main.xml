@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_titlebar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/title_mainname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/app_name"
+            android:textColor="@color/foreground_on_dark"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/foreground_on_dark"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        tools:ignore="SpUsage" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/foreground_on_dark"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <ToggleButton
+            android:id="@+id/tb_scan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/border_color_on_light"
+            android:checked="true"
+            android:textOff="@string/scan_stop"
+            android:textOn="@string/scan_start"
+            android:textSize="18dp"
+            tools:ignore="SpUsage" />
+
+        <Button
+            android:id="@+id/btn_decodeEncoding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/border_color_on_light"
+            android:gravity="center"
+            android:onClick="onDecodeEncodingClick"
+            android:text="@string/scan_decodeEncoding"
+            android:textSize="18dp"
+            tools:ignore="SpUsage" />
+
+        <Button
+            android:id="@+id/btn_outTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/border_color_on_light"
+            android:gravity="center"
+            android:onClick="onOutTimeClick"
+            android:text="@string/scan_outTime"
+            android:textSize="18dp"
+            tools:ignore="SpUsage" />
+
+        <ToggleButton
+            android:id="@+id/tb_continueScan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/border_color_on_light"
+            android:checked="true"
+            android:textOff="@string/scan_close_continueScan"
+            android:textOn="@string/scan_open_continueScan"
+            android:textSize="18dp"
+            tools:ignore="SpUsage" />
+
+        <Button
+            android:id="@+id/btn_continueInterval"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/border_color_on_light"
+            android:gravity="center"
+            android:onClick="onContinueIntervalClick"
+            android:text="@string/scan_continueInterval"
+            android:textSize="18dp"
+            tools:ignore="SpUsage" />
+
+        <ToggleButton
+            android:id="@+id/tb_playVibrate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/border_color_on_light"
+            android:checked="true"
+            android:textOff="@string/scan_close_Vibrate"
+            android:textOn="@string/scan_open_Vibrate"
+            android:textSize="18dp"
+            tools:ignore="SpUsage" />
+
+        <ToggleButton
+            android:id="@+id/tb_playBeep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/border_color_on_light"
+            android:checked="true"
+            android:textOff="@string/scan_close_Beep"
+            android:textOn="@string/scan_open_Beep"
+            android:textSize="18dp"
+            tools:ignore="SpUsage" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<!--index.wxml-->
+<view class="header">
+  <button type="primary" class="button" bindtap="openPrinter">1、连接打印机</button>
+  <button type="primary" class="button" bindtap="createLabel_Text">2.1、打印：文字</button>
+  <button type="primary" class="button" bindtap="createLabel_QRCode">2.2、打印：二维码</button>
+  <button type="primary" class="button" bindtap="createLabel_Barcode">2.3、打印：一维码</button>
+  <button type="primary" class="button" bindtap="createLabel_LocalImage">2.4、打印：本地图片</button>
+  <button type="primary" class="button" bindtap="createLabel_NetworkImage">2.5、打印：网络图片</button>
+  <button type="primary" class="button" bindtap="disconnect">3、断开</button>
+</view>
+<view class="show{{''}}" style="position:fixed;">
+  <canvas id="test" type="2d" style="width: 600px; height: 600px;"/>
+</view>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LPAPI Quick 2.0.20210202</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="btn_printText">打印文本</string>
+    <string name="btn_print2Rcode">打印二维码</string>
+
+</resources>

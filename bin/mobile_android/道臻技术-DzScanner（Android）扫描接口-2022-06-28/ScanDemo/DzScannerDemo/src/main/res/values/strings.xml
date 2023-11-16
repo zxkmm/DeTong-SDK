@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="app_name">DzScanner Demo 1.0.20220628</string>
+    <string name="scan_start">开始扫码</string>
+    <string name="scan_stop">停止扫码</string>
+    <string name="scan_decodeEncoding">配置解码字符编码格式</string>
+    <string name="scan_outTime">配置扫描超时时间</string>
+    <string name="scan_continueInterval">配置连续扫描间隔时间</string>
+    <string name="scan_open_continueScan">开启连续扫描</string>
+    <string name="scan_close_continueScan">关闭连续扫描</string>
+    <string name="scan_open_Vibrate">开启震动</string>
+    <string name="scan_close_Vibrate">关闭震动</string>
+    <string name="scan_open_Beep">开启声音</string>
+    <string name="scan_close_Beep">关闭声音</string>
+
+</resources>

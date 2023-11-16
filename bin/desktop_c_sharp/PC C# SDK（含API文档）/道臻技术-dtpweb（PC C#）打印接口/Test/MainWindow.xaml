@@ -1,0 +1,196 @@
+﻿<Window x:Class="PrintTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ia="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:local="clr-namespace:PrintTest"
+        mc:Ignorable="d"
+        Title="DTPWeb-C# 打印测试"
+        Height="750"
+        Width="600"
+        Background="#F0FFFF">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width"
+                    Value="200" />
+            <Setter Property="Height"
+                    Value="28" />
+            <Setter Property="BorderBrush"
+                    Value="LightGreen" />
+            <Setter Property="BorderThickness"
+                    Value="1.5" />
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="Margin"
+                    Value="5" />
+        </Style>
+        <Style x:Key="OptionItemStyle"
+               TargetType="StackPanel">
+            <Setter Property="Orientation"
+                    Value="Horizontal" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+            <Setter Property="Background"
+                    Value="#ADD8E6" />
+            <Setter Property="Height"
+                    Value="28" />
+            <Setter Property="Margin"
+                    Value="5" />
+        </Style>
+        <Style x:Key="OptionItemTitleStyle"
+               TargetType="TextBlock">
+            <Setter Property="Margin"
+                    Value="10,0" />
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="TextAlignment"
+                    Value="Right" />
+            <Setter Property="Width"
+                    Value="100" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+            <Setter Property="Foreground"
+                    Value="Black" />
+            <Setter Property="Opacity"
+                    Value=".7" />
+        </Style>
+        <Style x:Key="OptionItemValueStyle"
+               TargetType="ComboBox">
+            <Setter Property="Width"
+                    Value="200" />
+            <Setter Property="BorderBrush"
+                    Value="DarkGray" />
+            <Setter Property="Background"
+                    Value="LightYellow" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+        </Style>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:MainViewModel x:Name="ViewModel" />
+    </Window.DataContext>
+    <ia:Interaction.Triggers>
+        <ia:EventTrigger EventName="Loaded">
+            <ia:InvokeCommandAction Command="{Binding LoadedCommand}"
+                                    PassEventArgsToCommand="True" />
+        </ia:EventTrigger>
+    </ia:Interaction.Triggers>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top"
+                    Style="{StaticResource OptionItemStyle}">
+            <TextBlock Style="{StaticResource OptionItemTitleStyle}"
+                       Text="打印机列表:" />
+            <ComboBox Style="{StaticResource OptionItemValueStyle}"
+                      ItemsSource="{Binding PrinterList}"
+                      DisplayMemberPath="Name"
+                      SelectedItem="{Binding CurrPrinter}">
+                <ia:Interaction.Triggers>
+                    <ia:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <ia:InvokeCommandAction Command="{Binding UpdatePrinterCmd}"
+                                                PassEventArgsToCommand="True" />
+                    </ia:EventTrigger>
+                </ia:Interaction.Triggers>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Top"
+                    Style="{StaticResource OptionItemStyle}">
+            <TextBlock Style="{StaticResource OptionItemTitleStyle}"
+                       Text="打印方向:" />
+            <ComboBox Style="{StaticResource OptionItemValueStyle}"
+                      ItemsSource="{Binding RotationList}"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Value"
+                      SelectedValue="{Binding Orientation}" />
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Top"
+                    Style="{StaticResource OptionItemStyle}">
+            <TextBlock Style="{StaticResource OptionItemTitleStyle}"
+                       Text="打印模式:" />
+            <ComboBox Style="{StaticResource OptionItemValueStyle}"
+                      ItemsSource="{Binding PrintModeList}"
+                      DisplayMemberPath="Name"
+                      SelectedItem="{Binding PrintMode}" />
+        </StackPanel>
+        <ScrollViewer>
+            <StackPanel DockPanel.Dock="Top"
+                        Orientation="Vertical"
+                        Margin="5">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button Content="打开打印机"
+                            Command="{Binding OpenPrinterCmd}" />
+                    <Button Content="关闭打印机"
+                            Command="{Binding ClosePrinterCmd}" />
+                </StackPanel>
+                <Separator />
+                <Button Content="文本绘制测试"
+                        Command="{Binding DrawTextCmd}"
+                        Width="410"/>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button Content="对象对齐测试"
+                            Command="{Binding DrawWithAlignmentCmd}" />
+                    <Button Content="对象旋转测试"
+                            Command="{Binding DrawWithRotationCmd}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button Content="一维码绘制测试"
+                            Command="{Binding DrawBarcodeCmd}" />
+                    <Button Content="二维码绘制测试"
+                            Command="{Binding DrawQRCodeCmd}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button Content="PDF417码绘制测试" Command="{Binding DrawPDF417Cmd}" />
+                    <Button Content="DataMatrix码绘制测试" Command="{Binding DrawDataMatrixCmd}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button Content="矩形绘制测试"
+                            Command="{Binding DrawRectCmd}" />
+                    <Button Content="椭圆绘制测试"
+                            Command="{Binding DrawEllipseCmd}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button Content="圆形绘制测试"
+                            Command="{Binding DrawCircleCmd}" />
+                    <Button Content="直线绘制测试"
+                            Command="{Binding DrawLineCmd}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button Content="URI图片绘制测试"
+                            Command="{Binding DrawImageUrlCmd}" />
+                    <Button Content="图片绘制测试"
+                            Command="{Binding DrawImageDataCmd}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="图片打印测试" Command="{Binding PrintImageCmd}" />
+                    <Button Content="JSON打印测试" Command="{Binding PrintJSONCmd}" />
+                </StackPanel>
+                <Separator />
+                <!--预览列表-->
+                <ItemsControl ItemsSource="{Binding PreviewList}"
+                              MinHeight="200">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1"
+                                    BorderBrush="LightBlue"
+                                    MaxWidth="400"
+                                    Margin="10,5">
+                                <Image Source="{Binding .}" />
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

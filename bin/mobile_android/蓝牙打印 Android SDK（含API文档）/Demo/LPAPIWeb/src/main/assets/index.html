@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>LPAPIWeb 2.0.20210202</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="js/LPAPI-0.4.20181022.js"></script>
+    <script>
+        var lpapi = new LPAPI();
+
+        /**
+         * 获取打印机列表，并显示打印机列表。
+         */
+        function updatePrintersSelect() {
+            try {
+                var printerSelect = document.getElementById("printerSelect");
+                if (!printerSelect)
+                    return;
+
+                printerSelect.innerHTML = "";
+                var printerNames = lpapi.getAllPrinters();
+                
+                if (!printerNames){
+                    printerSelect.options.add(new Option("未检测到打印机", ""));
+                    return;
+                }
+
+                var printerList = printerNames.split(",");
+                for (var i = 0; i < printerList.length; i++) {
+                    printerSelect.options.add(new Option(printerList[i], printerList[i]));
+                }
+            } catch (e) {
+            }
+        }
+
+        /**
+         * 打开目标打印机。
+         */
+        function openPrinter() {
+            var printerName = document.getElementById("printerSelect").value;
+            if (!printerName)
+                return false;
+
+            return lpapi.openPrinterSync(printerName);
+        }
+
+        /**
+         *打印文本信息。
+         */
+        function printText() {
+            // 打开打印机
+            if (!openPrinter())
+                return;
+
+            // 开始打印操作。
+            lpapi.startJob(80, 40, 90);
+            lpapi.drawRectangle(0, 0, 80, 40, 0.5);
+            lpapi.setItemVerticalAlignment(0);
+            lpapi.setItemHorizontalAlignment(0);    // 0：表示考上或者靠左; 1：表示居中显示; 2：表示靠右或者靠下显示；默认(不调用该函数）为0；
+            lpapi.drawText("上海道臻信息技术有限公司", 5, 5, 70, 10, 5, 1);
+            lpapi.setItemHorizontalAlignment(1);
+            lpapi.drawText("上海道臻信息技术有限公司", 5, 15, 70, 10, 5, 0);
+            lpapi.setItemHorizontalAlignment(2);
+            lpapi.drawText("上海道臻信息技术有限公司", 5, 25, 70, 10, 5, 1);
+            //
+            lpapi.commitJob();
+        }
+
+        /**
+         * 打印二维码。
+         */
+        function printQRCode() {
+            // 打开打印机
+            if (!openPrinter())
+                return;
+
+            // 开始打印操作。
+            lpapi.startJob(40, 40, 0);
+            lpapi.drawRectangle(0, 0, 40, 40, 0.5);
+            lpapi.draw2DQRCode("上海道臻信息技术有限公司", 5, 5, 30, 30);
+            //
+            lpapi.commitJob();
+        }
+
+        /**
+         * 打印一维码。
+         */
+        function printBarcode() {
+            // 打开打印机
+            if (!openPrinter())
+                return;
+
+            // 开始打印操作。
+            lpapi.startJob(40, 30, 0);
+            lpapi.drawRectangle(0, 0, 40, 30, 0.5);
+            lpapi.draw1DBarcode("1234567890", 60, 5, 5, 30, 20, 3);
+            //
+            lpapi.commitJob();
+        }
+
+        /**
+         * 创建打印机对象，并更新打印机列表。
+         */
+        window.onload = function () {
+            updatePrintersSelect();
+        }
+    </script>
+</head>
+<body>
+<div>
+    <div style="height: 20px; text-align: center">
+        <h2>LPAPI Web 2.0.20210202</h2>
+    </div>
+
+    <div style="height: 16px; text-align: center; margin-top:30px">
+        <div style="margin: 15px;">
+            <div style="display: inline-block">打印机：</div>
+            <select id="printerSelect">
+                <option>请选择打印机</option>
+            </select>
+        </div>
+
+        <input type="button" onClick="printText()" value="打印文本" style="width:150px; height:30px; margin:5px"><br>
+        <input type="button" onClick="printQRCode()" value="打印二维码" style="width:150px; height:30px; margin:5px"><br>
+        <input type="button" onClick="printBarcode()" value="打印一维码" style="width:150px; height:30px; margin:5px"><br>
+    </div>
+</div>
+</body>
+</html>

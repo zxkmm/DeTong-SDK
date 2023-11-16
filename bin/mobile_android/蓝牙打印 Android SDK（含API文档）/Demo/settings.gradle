@@ -1,0 +1,2 @@
+rootProject.name='Demo'
+include ':LPAPIDemo', ':LPAPIQuick', ':LPAPIWeb', ':NFCDemo'
